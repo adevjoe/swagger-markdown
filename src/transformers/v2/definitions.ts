@@ -105,7 +105,7 @@ export function transformDefinition(definitions: OpenAPIV2.DefinitionsObject): s
   let hasDefinitions = false;
   const md = Markdown.md();
   md
-    .line(md.string('Models').h3())
+    .line(md.string('Models').h2())
     .line();
 
   Object.keys(definitions).forEach((definitionName: string) => {

@@ -11,7 +11,7 @@ import { transformHeaders } from './headers';
  */
 export function transformResponses(responses: OpenAPIV2.ResponsesObject) {
   const md = Markdown.md();
-  md.line(md.string('Responses').h5())
+  md.line(md.string('Responses:'))
     .line();
 
   // Check if schema somewhere

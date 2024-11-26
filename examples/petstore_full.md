@@ -5,17 +5,17 @@ This is a sample server Petstore server.
 
 For this sample, you can use the api key `special-key` to test the authorization filters
 
-## Version: 1.0.0
+Version: 1.0.0
 
-### Terms of service
-http://helloreverb.com/terms/
+Terms of service
+> http://helloreverb.com/terms/
 
 **Contact information:**  
 apiteam@swagger.io  
 
 **License:** [Apache 2.0](http://www.apache.org/licenses/LICENSE-2.0.html)
 
-### Security
+Security
 **api_key**  
 
 | apiKey | *API Key* |
@@ -36,47 +36,40 @@ apiteam@swagger.io
 **Schemes:** http
 
 ---
-### /pets
+## pet
+### Add a new pet to the store
 
-#### POST
-##### Summary
+`POST /pets`
 
-Add a new pet to the store
-
-##### Description
-
-##### Parameters
+Parameters:
 
 | Name | Located in | Description | Required | Schema |
 | ---- | ---------- | ----------- | -------- | ------ |
 | body | body | Pet object that needs to be added to the store | No | [Pet](#pet) |
 
-##### Responses
+Responses:
 
 | Code | Description |
 | ---- | ----------- |
 | 405 | Invalid input<br>**Headers:**<br>**X-Rate-Limit-Limit** (integer): The number of allowed requests in the current period<br>**X-Rate-Limit-Remaining** (integer): The number of remaining requests in the current period<br>**X-Rate-Limit-Reset** (integer): The number of seconds left in the current period<br> |
 
-##### Security
+Security:
 
 | Security Schema | Scopes |  |
 | --------------- | ------ | --- |
 | petstore_auth | write_pets | read_pets |
 
-#### PUT
-##### Summary
+### Update an existing pet
 
-Update an existing pet
+`PUT /pets`
 
-##### Description
-
-##### Parameters
+Parameters:
 
 | Name | Located in | Description | Required | Schema |
 | ---- | ---------- | ----------- | -------- | ------ |
 | body | body | Pet object that needs to be added to the store | No | [Pet](#pet) |
 
-##### Responses
+Responses:
 
 | Code | Description |
 | ---- | ----------- |
@@ -84,90 +77,81 @@ Update an existing pet
 | 404 | Pet not found |
 | 405 | Validation exception |
 
-##### Security
+Security:
 
 | Security Schema | Scopes |  |
 | --------------- | ------ | --- |
 | petstore_auth | write_pets | read_pets |
 
-### /pets/findByStatus
+### Finds Pets by status
 
-#### GET
-##### Summary
+`GET /pets/findByStatus`
 
-Finds Pets by status
+Description:
 
-##### Description
+> Multiple status values can be provided with comma seperated strings
 
-Multiple status values can be provided with comma seperated strings
-
-##### Parameters
+Parameters:
 
 | Name | Located in | Description | Required | Schema |
 | ---- | ---------- | ----------- | -------- | ------ |
 | status | query | Status values that need to be considered for filter | No | [ string ] |
 
-##### Responses
+Responses:
 
 | Code | Description | Schema |
 | ---- | ----------- | ------ |
 | 200 | successful operation | [ [Pet](#pet) ] |
 | 400 | Invalid status value |  |
 
-##### Security
+Security:
 
 | Security Schema | Scopes |  |
 | --------------- | ------ | --- |
 | petstore_auth | write_pets | read_pets |
 
-### /pets/findByTags
+### Finds Pets by tags
 
-#### GET
-##### Summary
+`GET /pets/findByTags`
 
-Finds Pets by tags
+Description:
 
-##### Description
+> Muliple tags can be provided with comma seperated strings. Use tag1, tag2, tag3 for testing.
 
-Muliple tags can be provided with comma seperated strings. Use tag1, tag2, tag3 for testing.
-
-##### Parameters
+Parameters:
 
 | Name | Located in | Description | Required | Schema |
 | ---- | ---------- | ----------- | -------- | ------ |
 | tags | query | Tags to filter by | No | [ string ] |
 
-##### Responses
+Responses:
 
 | Code | Description | Schema |
 | ---- | ----------- | ------ |
 | 200 | successful operation | [ [Pet](#pet) ] |
 | 400 | Invalid tag value |  |
 
-##### Security
+Security:
 
 | Security Schema | Scopes |  |
 | --------------- | ------ | --- |
 | petstore_auth | write_pets | read_pets |
 
-### /pets/{petId}
+### Find pet by ID
 
-#### GET
-##### Summary
+`GET /pets/{petId}`
 
-Find pet by ID
+Description:
 
-##### Description
+> Returns a pet when ID < 10.  ID > 10 or nonintegers will simulate API error conditions
 
-Returns a pet when ID < 10.  ID > 10 or nonintegers will simulate API error conditions
-
-##### Parameters
+Parameters:
 
 | Name | Located in | Description | Required | Schema |
 | ---- | ---------- | ----------- | -------- | ------ |
 | petId | path | ID of pet that needs to be fetched | Yes | long |
 
-##### Responses
+Responses:
 
 | Code | Description | Schema |
 | ---- | ----------- | ------ |
@@ -175,21 +159,18 @@ Returns a pet when ID < 10.  ID > 10 or nonintegers will simulate API error cond
 | 400 | Invalid ID supplied |  |
 | 404 | Pet not found |  |
 
-##### Security
+Security:
 
 | Security Schema | Scopes |  |
 | --------------- | ------ | --- |
 | api_key |  |  |
 | petstore_auth | write_pets | read_pets |
 
-#### POST
-##### Summary
+### Updates a pet in the store with form data
 
-Updates a pet in the store with form data
+`POST /pets/{petId}`
 
-##### Description
-
-##### Parameters
+Parameters:
 
 | Name | Located in | Description | Required | Schema |
 | ---- | ---------- | ----------- | -------- | ------ |
@@ -197,85 +178,75 @@ Updates a pet in the store with form data
 | name | formData | Updated name of the pet | Yes | string |
 | status | formData | Updated status of the pet | Yes | string |
 
-##### Responses
+Responses:
 
 | Code | Description |
 | ---- | ----------- |
 | 405 | Invalid input |
 
-##### Security
+Security:
 
 | Security Schema | Scopes |  |
 | --------------- | ------ | --- |
 | petstore_auth | write_pets | read_pets |
 
-#### DELETE
-##### Summary
+### Deletes a pet
 
-Deletes a pet
+`DELETE /pets/{petId}`
 
-##### Description
-
-##### Parameters
+Parameters:
 
 | Name | Located in | Description | Required | Schema |
 | ---- | ---------- | ----------- | -------- | ------ |
 | api_key | header |  | Yes | string |
 | petId | path | Pet id to delete | Yes | long |
 
-##### Responses
+Responses:
 
 | Code | Description |
 | ---- | ----------- |
 | 400 | Invalid pet value |
 
-##### Security
+Security:
 
 | Security Schema | Scopes |  |
 | --------------- | ------ | --- |
 | petstore_auth | write_pets | read_pets |
 
 ---
-### /stores/order
+## store
+### Place an order for a pet
 
-#### POST
-##### Summary
+`POST /stores/order`
 
-Place an order for a pet
-
-##### Description
-
-##### Parameters
+Parameters:
 
 | Name | Located in | Description | Required | Schema |
 | ---- | ---------- | ----------- | -------- | ------ |
 | body | body | order placed for purchasing the pet | No | [Order](#order) |
 
-##### Responses
+Responses:
 
 | Code | Description | Schema |
 | ---- | ----------- | ------ |
 | 200 | successful operation | [Order](#order) |
 | 400 | Invalid Order |  |
 
-### /stores/order/{orderId}
+### Find purchase order by ID
 
-#### GET
-##### Summary
+`GET /stores/order/{orderId}`
 
-Find purchase order by ID
+Description:
 
-##### Description
+> For valid response try integer IDs with value <= 5 or > 10. Other values will generated exceptions
 
-For valid response try integer IDs with value <= 5 or > 10. Other values will generated exceptions
-
-##### Parameters
+Parameters:
 
 | Name | Located in | Description | Required | Schema |
 | ---- | ---------- | ----------- | -------- | ------ |
 | orderId | path | ID of pet that needs to be fetched | Yes | string |
 
-##### Responses
+Responses:
 
 | Code | Description | Schema |
 | ---- | ----------- | ------ |
@@ -283,22 +254,21 @@ For valid response try integer IDs with value <= 5 or > 10. Other values will ge
 | 400 | Invalid ID supplied |  |
 | 404 | Order not found |  |
 
-#### DELETE
-##### Summary
+### Delete purchase order by ID
 
-Delete purchase order by ID
+`DELETE /stores/order/{orderId}`
 
-##### Description
+Description:
 
-For valid response try integer IDs with value < 1000. Anything above 1000 or nonintegers will generate API errors
+> For valid response try integer IDs with value < 1000. Anything above 1000 or nonintegers will generate API errors
 
-##### Parameters
+Parameters:
 
 | Name | Located in | Description | Required | Schema |
 | ---- | ---------- | ----------- | -------- | ------ |
 | orderId | path | ID of the order that needs to be deleted | Yes | string |
 
-##### Responses
+Responses:
 
 | Code | Description |
 | ---- | ----------- |
@@ -306,125 +276,98 @@ For valid response try integer IDs with value < 1000. Anything above 1000 or non
 | 404 | Order not found |
 
 ---
-### /users
+## user
+### Create user
 
-#### POST
-##### Summary
+`POST /users`
 
-Create user
+Description:
 
-##### Description
+> This can only be done by the logged in user.
 
-This can only be done by the logged in user.
-
-##### Parameters
+Parameters:
 
 | Name | Located in | Description | Required | Schema |
 | ---- | ---------- | ----------- | -------- | ------ |
 | body | body | Created user object | No | [User](#user) |
 
-##### Responses
+Responses:
 
 | Code | Description |
 | ---- | ----------- |
 | default | successful operation |
 
-### /users/createWithArray
+### Creates list of users with given input array
 
-#### POST
-##### Summary
+`POST /users/createWithArray`
 
-Creates list of users with given input array
-
-##### Description
-
-##### Parameters
+Parameters:
 
 | Name | Located in | Description | Required | Schema |
 | ---- | ---------- | ----------- | -------- | ------ |
 | body | body | List of user object | No | [ [User](#user) ] |
 
-##### Responses
+Responses:
 
 | Code | Description |
 | ---- | ----------- |
 | default | successful operation |
 
-### /users/createWithList
+### Creates list of users with given input array
 
-#### POST
-##### Summary
+`POST /users/createWithList`
 
-Creates list of users with given input array
-
-##### Description
-
-##### Parameters
+Parameters:
 
 | Name | Located in | Description | Required | Schema |
 | ---- | ---------- | ----------- | -------- | ------ |
 | body | body | List of user object | No | [ [User](#user) ] |
 
-##### Responses
+Responses:
 
 | Code | Description |
 | ---- | ----------- |
 | default | successful operation |
 
-### /users/login
+### Logs user into the system
 
-#### GET
-##### Summary
+`GET /users/login`
 
-Logs user into the system
-
-##### Description
-
-##### Parameters
+Parameters:
 
 | Name | Located in | Description | Required | Schema |
 | ---- | ---------- | ----------- | -------- | ------ |
 | username | query | The user name for login | No | string |
 | password | query | The password for login in clear text | No | string |
 
-##### Responses
+Responses:
 
 | Code | Description | Schema |
 | ---- | ----------- | ------ |
 | 200 | successful operation | string |
 | 400 | Invalid username/password supplied |  |
 
-### /users/logout
+### Logs out current logged in user session
 
-#### GET
-##### Summary
+`GET /users/logout`
 
-Logs out current logged in user session
-
-##### Description
-
-##### Responses
+Responses:
 
 | Code | Description |
 | ---- | ----------- |
 | default | successful operation |
 
-### /users/{username}
+### Get user by user name
 
-#### GET
-##### Summary
+`GET /users/{username}`
 
-Get user by user name
-
-##### Description
-
-##### Parameters
+Parameters:
 
 | Name | Located in | Description | Required | Schema |
 | ---- | ---------- | ----------- | -------- | ------ |
 | username | path | The name that needs to be fetched. Use user1 for testing. | Yes | string |
 
-##### Responses
+Responses:
 
 | Code | Description | Schema |
 | ---- | ----------- | ------ |
@@ -432,45 +375,43 @@ Get user by user name
 | 400 | Invalid username supplied |  |
 | 404 | User not found |  |
 
-#### PUT
-##### Summary
+### Updated user
 
-Updated user
+`PUT /users/{username}`
 
-##### Description
+Description:
 
-This can only be done by the logged in user.
+> This can only be done by the logged in user.
 
-##### Parameters
+Parameters:
 
 | Name | Located in | Description | Required | Schema |
 | ---- | ---------- | ----------- | -------- | ------ |
 | username | path | name that need to be deleted | Yes | string |
 | body | body | Updated user object | No | [User](#user) |
 
-##### Responses
+Responses:
 
 | Code | Description |
 | ---- | ----------- |
 | 400 | Invalid user supplied |
 | 404 | User not found |
 
-#### DELETE
-##### Summary
+### Delete user
 
-Delete user
+`DELETE /users/{username}`
 
-##### Description
+Description:
 
-This can only be done by the logged in user.
+> This can only be done by the logged in user.
 
-##### Parameters
+Parameters:
 
 | Name | Located in | Description | Required | Schema |
 | ---- | ---------- | ----------- | -------- | ------ |
 | username | path | The name that needs to be deleted | Yes | string |
 
-##### Responses
+Responses:
 
 | Code | Description |
 | ---- | ----------- |
@@ -478,7 +419,7 @@ This can only be done by the logged in user.
 | 404 | User not found |
 
 ---
-### Models
+## Models
 
 #### User
 

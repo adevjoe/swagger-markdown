@@ -61,12 +61,7 @@ export function transformSwaggerV2(
     const tagged = groupPathsByTags(inputDoc.paths);
 
     Object.keys(tagged).forEach((tagName) => {
-      md.line(md.string().horizontalRule());
-      if (tagsCollection.length) {
-        // Display Tag
-        const tagObject = tagsCollection.getTag(tagName) || '';
-        md.line(transformTag(tagObject));
-      }
+      md.line(md.string(tagName || 'default').h2());
       const pathsUnderTag = tagged[tagName];
       Object.keys(pathsUnderTag).forEach((path: string) => md.line(transformPath(
         path,

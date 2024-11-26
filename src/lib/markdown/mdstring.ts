@@ -136,6 +136,20 @@ export class MDstring {
     return this;
   }
 
+  public quote(): MDstring {
+    if (this._string !== '') {
+      this.set(`> ${this._string}`);
+    }
+    return this;
+  }
+
+  public inlineCode(): MDstring {
+    if (this._string !== '') {
+      this.set(`\`${this._string}\``);
+    }
+    return this;
+  }
+
   public concat(string: string | MDstring): MDstring {
     const s = typeof string === 'string' ? string : string.get();
     this._string = `${this._string}${s}`;

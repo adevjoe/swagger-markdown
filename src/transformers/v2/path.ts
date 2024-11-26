@@ -25,9 +25,6 @@ export function transformPath(
 
   const md = Markdown.md();
 
-  // Make path as a header
-  md.line(md.string(path).h3());
-
   // Check if parameter for path are in the place
   if ('parameters' in data) {
     pathParameters = data.parameters;
@@ -36,10 +33,17 @@ export function transformPath(
   // Go further method by methods
   Object.keys(data).forEach((method) => {
     if (ALLOWED_METHODS.includes(method)) {
-      md.line('');
-      // Set method as a subheader
-      md.line(md.string(method.toUpperCase()).h4());
       const pathInfo: OpenAPIV2.OperationObject = data[method];
+
+      // Set summary as a header
+      if ('summary' in pathInfo) {
+        md.line(md.string(pathInfo.summary).h3())
+          .line()
+      }
+
+      // Make path as a header
+      md.line(md.string(method.toUpperCase() + " " + path).inlineCode())
+        .line();
 
       // Deprecation
       if ('deprecated' in pathInfo && pathInfo.deprecated === true) {
@@ -51,19 +55,11 @@ export function transformPath(
         md.line(transformSchemes(pathInfo.schemes));
       }
 
-      // Set summary
-      if ('summary' in pathInfo) {
-        md.line(md.string('Summary:').h5())
-          .line()
-          .line(md.string(pathInfo.summary).escape())
-          .line();
-      }
-
       // Set description
-      if ('description' in pathInfo) {
-        md.line(md.string('Description:').h5())
+      if ('description' in pathInfo && pathInfo.description !== '') {
+        md.line(md.string('Description:'))
           .line()
-          .line(md.string(pathInfo.description).escape())
+          .line(md.string(pathInfo.description).quote())
           .line();
       }
 

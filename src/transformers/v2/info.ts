@@ -22,12 +22,12 @@ export function transformInfo(info: OpenAPIV2.InfoObject) {
     }
 
     if ('version' in info) {
-      md.line(md.string(`Version: ${info.version}`).h2()).line();
+      md.line(md.string(`Version: ${info.version}`)).line();
     }
 
     if ('termsOfService' in info) {
-      md.line(md.string('Terms of service').h3())
-        .line(md.string(info.termsOfService).escape())
+      md.line(md.string('Terms of service'))
+        .line(md.string(info.termsOfService).quote())
         .line();
     }
 

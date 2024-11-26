@@ -9,7 +9,7 @@ export const transformParameters = (
 ) => {
   const md = Markdown.md();
 
-  md.line(md.string('Parameters').h5()).line();
+  md.line(md.string('Parameters:')).line();
   const table = md.table();
   table.th('Name').th('Located in').th('Description').th('Required')
     .th('Schema');

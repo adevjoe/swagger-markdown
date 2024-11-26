@@ -3,7 +3,7 @@ import { Markdown } from '../../lib/markdown';
 
 export function transformSecurity(security: OpenAPIV2.SecurityRequirementObject[]) {
   const md = Markdown.md();
-  md.line(md.string('Security').h5()).line();
+  md.line(md.string('Security:')).line();
   let hasRules = false;
 
   let maxLength = 0;
