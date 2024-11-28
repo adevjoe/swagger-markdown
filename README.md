@@ -1,4 +1,4 @@
-# swagger-markdown
+# swagger-markdown-plus
 
 [![npm][npm-image]][npm-url] [![circle ci][circleci-image]][circleci-url]
 
@@ -16,7 +16,7 @@ see [examples](https://github.com/syroegkin/swagger-markdown/tree/master/example
 ### Installation
 
 ```bash
-npm install -g swagger-markdown
+npm install -g swagger-markdown-plus
 ```
 
 ### Usage
